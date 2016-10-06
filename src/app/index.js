@@ -1,37 +1,11 @@
-// import React from "react";
-// import {render} from "react-dom";
-//
-// import { User } from './components/User';
-// import { Main } from './components/Main';
-//
-// class App extends React.Component {
-//     constructor() {
-//         super();
-//         this.state = {
-//             username: "Max"
-//         };
-//     }
-//
-//     changeUsername(newName) {
-//         this.setState({
-//             username: newName
-//         });
-//     }
-//
-//     render() {
-//         return (
-//             <div className="container">
-//                 <Main changeUsername={this.changeUsername.bind(this)}/>
-//                 <User username={this.state.username}/>
-//             </div>
-//         );
-//     }
-// }
-//
-// render(<App />, window.document.getElementById('app'));
+import React from "react";
+import {render} from "react-dom";
+
+import App from "./components/App"
 
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import logger from 'redux-logger'
+import {Provider} from 'react-redux'
 
 const mathReducer = (state = {
   result: 1,
@@ -92,20 +66,8 @@ store.subscribe(() => {
   // console.log('store updated!', store.getState())
 })
 
-// actions
-store.dispatch({
-  type: "ADD",
-  payload: 100
-})
-store.dispatch({
-  type: "ADD",
-  payload: 22
-})
-store.dispatch({
-  type: "SUBTRACT",
-  payload: 80
-})
-store.dispatch({
-  type: "SET_AGE",
-  payload: 30
-})
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>
+  , window.document.getElementById('app'));
